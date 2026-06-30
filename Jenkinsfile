@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Check Python') {
+            steps {
+                sh 'python3 --version'
+                sh 'pip3 --version'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip3 install -r requirements-ci.txt'
+            }
+        }
+
+        stage('Run Test') {
+            steps {
+                sh 'pytest'
+            }
+        }
+    }
+}
